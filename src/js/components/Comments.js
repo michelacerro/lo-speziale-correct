@@ -9,9 +9,9 @@ import Comment from './Comment';
 
 
 const Comments = () => {
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [comment, setComment] = useState('');
+    const [name, setName] = useState();
+    const [email, setEmail] = useState();
+    const [comment, setComment] = useState();
 
     const comments = JSON.parse(window.localStorage.getItem('comments')) || [];
 

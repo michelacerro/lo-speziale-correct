@@ -24,18 +24,19 @@ const SingleRecipe = () => {
     const [details, setDetails] = useState([]);
     const urlDetails = ` https://api.spoonacular.com/recipes/${id}/information?apiKey=${apiKey}&includeNutrition=true`;
     
+    async function fetchData (url) {
+        const response = await axios.get(url)
+            .catch(error => alert(error));
+        setDetails(response.data);
+    }
+
     useEffect(() => {
-        async function fetchData () {
-            const response = await axios.get(urlDetails)
-                .catch(error => alert(error));
-            setDetails(response.data);
-        }
-        fetchData();
+        fetchData(urlDetails);
     }, [urlDetails]);
 
     // recipe ingredients request
     const [ingredients, setIngredients] = useState([]);
-    const [noIngredients, setNoIngredients] = useState('');
+    const [noIngredients, setNoIngredients] = useState();
     const urlIngredients = `https://api.spoonacular.com/recipes/${id}/ingredientWidget.json?apiKey=${apiKey}`;
 
     useEffect(() => {
@@ -50,7 +51,7 @@ const SingleRecipe = () => {
 
     // recipe steps request
     const [steps, setSteps] = useState([]);
-    const [noSteps, setNoSteps] = useState('');
+    const [noSteps, setNoSteps] = useState();
     const urlSteps = `https://api.spoonacular.com/recipes/${id}/analyzedInstructions?apiKey=${apiKey}`;
 
     useEffect(() => {
@@ -64,9 +65,9 @@ const SingleRecipe = () => {
     }, [urlSteps]);
 
     // ---------- COMMENTS SECTION
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [comment, setComment] = useState('');
+    const [name, setName] = useState();
+    const [email, setEmail] = useState();
+    const [comment, setComment] = useState();
 
     const comments = JSON.parse(window.localStorage.getItem('comments')) || [];
 

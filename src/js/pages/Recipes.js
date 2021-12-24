@@ -21,13 +21,14 @@ const Recipes = () => {
     // ----- get recipes
     const [recipes, setRecipes] = useState([]);
 
-    useEffect(() => {
-        async function fetchData () {
-            const response = await (axios.get(url))
-                .catch(error => alert(error));
-            setRecipes(response.data.results);
-        }
-        fetchData();
+    async function fetchData(url) {
+        const response = await (axios.get(url))
+            .catch(error => alert(error));
+        setRecipes(response.data.results);
+    }
+
+    useEffect(() => {    
+        fetchData(url);
     }, [url]);
 
     // ----- open filters section
@@ -51,7 +52,7 @@ const Recipes = () => {
 
     // ----- set filters
     // query and time filters
-    const [query, setQuery] = useState('');
+    const [query, setQuery] = useState();
     const [time, setTime] = useState();
 
     // intolerances filter

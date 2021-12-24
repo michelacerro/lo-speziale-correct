@@ -15,13 +15,14 @@ const RecipesSection = () => {
     const url = `https://api.spoonacular.com/recipes/random?apiKey=${apiKey}&number=3`;
     const [recipes, setRecipes] = useState([]);
 
+    async function fetchData(url) {
+        const response = await (axios.get(url))
+            .catch(error => alert(error));
+        setRecipes(response.data.recipes);
+    }
+
     useEffect(() => {
-        async function fetchData () {
-            const response = await (axios.get(url))
-                .catch(error => alert(error));
-            setRecipes(response.data.recipes);
-        }
-        fetchData();
+        fetchData(url);
     }, [url]);
 
     return (
