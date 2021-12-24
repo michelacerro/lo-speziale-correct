@@ -1,0 +1,82 @@
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    background-color: #ffffff;
+    box-shadow: 0 3px 1rem rgba(0, 0, 0, 0.1);
+    z-index: 2;
+
+    display: flex;
+    justify-content: space-between;
+
+    transition: all 0.5s ease;
+}
+
+/* --------- LOGO --------- */
+.header-logo {
+    margin: 15px;
+    font-size: 1.3em;
+    text-decoration: none;
+    transform: 1s;
+}
+.logo:hover {opacity: 0.9;}
+
+
+/* ---------- NAVBAR ----------- */
+.navbar {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+    text-align: right;
+    margin-right: 10px;
+}
+
+.navbar-icon{
+    margin: 20px;
+    padding: 5px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    cursor: pointer;
+
+    display: flex;
+    flex-direction: column; 
+}
+.icon-bar {
+    background-color: #000000;
+    width: 20px;
+    height: 2.5px;
+    margin: 1.5px;
+
+    transition: 1s;
+}
+
+.navbar-list {
+    display: none;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-right: 20px;
+    transition: all 1s ease;
+}
+.navbar-link {
+    color: #000000;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin: 10px 0;
+}
+.navbar-link:hover {border-bottom: 1px solid #000000;}
+
+
+/* ----------- RESPONSIVENESS ---------- */
+@media only screen and (min-width: 800px) {
+    .header {align-items: center;}
+    .navbar-icon {display: none;}
+    .navbar-list {
+        display: flex;
+        flex-direction: row;
+    }
+    .navbar-link {margin: 0 10px;}
+}

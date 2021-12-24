@@ -1,0 +1,17 @@
+.button {
+    background-color: var(--red);
+    margin: 5px;
+    padding: 10px 15px;
+    border: none;
+    
+    transform: 1s;
+}
+.button:hover {opacity: 0.9;}
+
+.button-link {
+    color: var(--white);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-size: 1.2em;
+}

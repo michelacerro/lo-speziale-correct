@@ -1,0 +1,27 @@
+.recipe-preview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: 10px;
+    min-width: 170px;
+    background-color: inherit;
+
+    text-decoration: none;
+    color: var(--blue);
+
+    transition: 0.5s linear;
+}
+.recipe-preview:hover {
+    background-color: #ffffff;
+    transform: scale(1.05);
+}
+
+.recipe-preview img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+}
+
+.recipe-preview h5 {text-align: center;}

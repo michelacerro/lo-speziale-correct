@@ -1,0 +1,40 @@
+.error-page {
+    min-height: 100vh;
+
+    background-image: url('../../images/background-image-vertical.jpg');
+    background-size: cover;
+    background-position-y: 80%;
+    background-position-x: right;
+    background-attachment: fixed;
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+
+.error-message {
+    padding: 50px;
+    padding-top: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.error-message h1{
+    color: var(--red);
+    margin-bottom: 15px;
+}
+
+.error-message p {
+    color: #ffffff;
+    mix-blend-mode: difference;
+
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+/* -------- RESPONSIVENESS ---------- */
+@media only screen and (min-width: 961px) {
+    .error-message {padding: 100px;}
+}

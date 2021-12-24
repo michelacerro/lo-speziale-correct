@@ -1,0 +1,32 @@
+[
+    {
+        "id": 1,
+        "name": "Lucia Grandi",
+        "role": "chef & fondatrice",
+        "image": "staff-1.jpg"
+    },
+    {
+        "id": 2,
+        "name": "Alessandro Rossi",
+        "role": "chef",
+        "image": "staff-2.jpg"
+    },
+    {
+        "id": 3,
+        "name": "Mattia Bianchi",
+        "role": "aiuto chef",
+        "image": "staff-3.jpg"
+    },
+    {
+        "id": 4,
+        "name": "Giulia Ferrari",
+        "role": "pasticcera",
+        "image": "staff-4.jpg"
+    },
+    {
+        "id": 5,
+        "name": "Alessio Romano",
+        "role": "segretario",
+        "image": "staff-5.jpg"
+    }
+]

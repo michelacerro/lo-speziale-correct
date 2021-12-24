@@ -1,0 +1,18 @@
+.staff-box {
+    text-align: center;
+    margin: 20px;
+}
+
+.staff-box img {
+    width: 150px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+}
+
+.staff-box h4, .staff-box h5 {color: var(--blue);}
+
+.staff-box h5 {
+    text-transform: uppercase;
+    font-weight: 400;
+}
+

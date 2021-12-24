@@ -1,0 +1,24 @@
+.slider-container {
+    padding: 50px 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.slider-arrow {
+    cursor: pointer;
+    color: var(--blue);
+    font-size: 50px;
+    opacity: 0.8;
+    transition: 0.5s linear;
+}
+.slider-arrow:hover {opacity: 1;}
+
+.slider-image {
+    width: 60vw;
+    max-width: 900px;
+}
+
+.slide {opacity: 0;}
+.slide.active {opacity: 1;}

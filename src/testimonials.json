@@ -1,0 +1,16 @@
+[
+    {
+        "id": 1,
+        "name": "Chiara Bianchi",
+        "course": "Le spezie in pasticceria",
+        "comment": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam id facilisis odio. Duis posuere sollicitudin odio et rhoncus. Proin orci mauris, suscipit in diam non, varius ultricies nulla. Praesent non mauris convallis, interdum massa sit amet, dapibus magna.",
+        "image": "testimonial-1.jpg"
+    },
+    {
+        "id": 2,
+        "name": "Paolo Rossi",
+        "course": "La cucina moderna",
+        "comment": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam id facilisis odio. Duis posuere sollicitudin odio et rhoncus. Proin orci mauris, suscipit in diam non, varius ultricies nulla. Praesent non mauris convallis, interdum massa sit amet, dapibus magna.",
+        "image": "testimonial-2.jpg"
+    }
+]
