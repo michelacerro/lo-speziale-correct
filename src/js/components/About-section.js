@@ -7,11 +7,10 @@ import React from 'react';
 // Components
 import Button from './Button';
 
-// Images 
-import Image from '../../images/slider/school-8.jpg';
-
 
 const AboutSection = () => {
+    const Image = `${process.env.PUBLIC_URL}/images/slider/school-8.jpg`;
+
     return (
         <div className={style['about-section']}>
             <h1>Le spezie come stile di cucina</h1>

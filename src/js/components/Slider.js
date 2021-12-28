@@ -7,18 +7,17 @@ import React, {useState} from 'react';
 // Icons
 import {AiOutlineRight, AiOutlineLeft} from 'react-icons/ai';
 
-// Images
-import School1 from '../../images/slider/school-1.jpg';
-import School2 from '../../images/slider/school-2.jpg';
-import School3 from '../../images/slider/school-3.jpg';
-import School4 from '../../images/slider/school-4.jpg';
-import School5 from '../../images/slider/school-5.jpg';
-import School6 from '../../images/slider/school-6.jpg';
-import School7 from '../../images/slider/school-7.jpg';
-import School8 from '../../images/slider/school-8.jpg';
-
 
 const Slider = () => {
+    const School1 = `${process.env.PUBLIC_URL}/images/slider/school-1.jpg`;
+    const School2 = `${process.env.PUBLIC_URL}/images/slider/school-2.jpg`;
+    const School3 = `${process.env.PUBLIC_URL}/images/slider/school-3.jpg`;
+    const School4 = `${process.env.PUBLIC_URL}/images/slider/school-4.jpg`;
+    const School5 = `${process.env.PUBLIC_URL}/images/slider/school-5.jpg`;
+    const School6 = `${process.env.PUBLIC_URL}/images/slider/school-6.jpg`;
+    const School7 = `${process.env.PUBLIC_URL}/images/slider/school-7.jpg`;
+    const School8 = `${process.env.PUBLIC_URL}/images/slider/school-8.jpg`;
+
     const images = [School1, School2, School3, School4, School5, School6, School7, School8];
     const [current, setCurrent] = useState(0);
 
