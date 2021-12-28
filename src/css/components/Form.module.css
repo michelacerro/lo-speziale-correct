@@ -24,7 +24,7 @@
     border: none;
     font-size: 1em;
 }
-.form-data label, .form-box textarea, .form-privacy {margin-bottom: 20px;}
+.form-data label, .form-box > label, .form-privacy-container {margin-bottom: 20px;}
 
 .form-privacy {
     width: 100%;
@@ -44,6 +44,7 @@
 }
 
 .form-box button {
+    cursor: pointer;
     background-color: var(--yellow);
     padding: 10px 15px;
     color: var(--blue);
@@ -53,14 +54,21 @@
 }
 .form-box button:hover {opacity: 0.9;}
 
-.form-error {
-    font-size: 14px;
-    text-transform: uppercase;
-    color: var(--yellow);
-    margin-top: 7px;
-    width: 100%;
-}
 .form-box h2 {text-align: center;}
+
+.error {
+    font-size: 12px;
+    font-weight: 500;
+    margin: 5px 0;
+    padding: 5px 0;
+    border-bottom: 1px solid var(--yellow);
+}
+
+.error-icon {
+    color: var(--yellow);
+    font-size: 16px;
+    margin-right: 5px;
+}
 
 /* ----------- RESPONSIVENESS ----------- */
 @media only screen and (min-width: 961px) {

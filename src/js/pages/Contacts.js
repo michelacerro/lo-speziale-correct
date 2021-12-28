@@ -6,7 +6,7 @@ import React from 'react';
 
 // Components
 import Logo from '../components/Logo';
-import Form from '../components/Form';
+import MyForm from '../components/MyForm';
 import Map from '../components/Map';
 
 
@@ -27,7 +27,7 @@ const Contacts = () => {
                     <p>Lunedì - Venerdì</p>
                     <p>9.00 - 18.00</p>
                 </div>
-                <Form  id='form' />
+                <MyForm  id='form' />
             </div>
             <div id='map' className={style['map']}>
                 <Map />

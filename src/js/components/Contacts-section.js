@@ -5,13 +5,13 @@ import style from '../../css/pages/Home.module.css';
 import React from 'react';
 
 // Components
-import Form from './Form';
+import MyForm from './MyForm';
 
 const ContactsSection = () => {
     return (
         <div className={style['contacts-section']}>
             <h1>Contattaci, è facile!</h1>
-            <Form />
+            <MyForm />
         </div>
     )
 };
