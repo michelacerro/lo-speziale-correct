@@ -3,12 +3,15 @@ import style from '../../css/components/Comments.module.css';
 
 // Dependencies
 import React, {useState} from 'react';
+import {useParams} from 'react-router-dom';
 
 // Components
 import Comment from './Comment';
 
 
 const Comments = () => {
+    const id = useParams().id;
+
     const [name, setName] = useState();
     const [email, setEmail] = useState();
     const [comment, setComment] = useState();
@@ -21,7 +24,8 @@ const Comments = () => {
         comments.push({
             'name': name,
             'email': email,
-            'comment': comment
+            'comment': comment,
+            'recipe_id': id
         });
 
         window.localStorage.setItem('comments', JSON.stringify(comments));
@@ -31,13 +35,11 @@ const Comments = () => {
         setComment('');
     };
 
-    
-
     return (
         <div className={style['comments-section']}>
-            <h1>Commenti</h1>
+            <h2>Commenti</h2>
             <form onSubmit={handleSubmit}>
-                <div>
+                <div className={style['comments-info-container']}>	
                     <label htmlFor='name'>
                         Nome*
                         <input 
@@ -79,7 +81,7 @@ const Comments = () => {
             <div className={style['comments-container']}>
                 {comments.length > 0 
                     ? 
-                        comments.map((comment, index) => <Comment key={index} info={comment}  />)
+                        comments.filter(comment => (comment.recipe_id === id)).map((comment, index) => <Comment key={index} info={comment} />)
                     :
                         ''
                 }
