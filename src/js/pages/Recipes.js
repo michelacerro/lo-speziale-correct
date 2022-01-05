@@ -2,108 +2,82 @@
 import style from '../../css/pages/Recipes.module.css';
 
 // Dependencies
-import React, {useState, useEffect} from 'react';
-import axios from 'axios';
+import React, {useState} from 'react';
+
+// Utils
+import {modifyQuery} from '../utils/Utils';
+
+// Hooks
+import {useAllRecipesData} from '../hooks/UseRecipesData';
 
 // Components
 import RecipePreview from '../components/RecipePreview';
+import MyLoading from '../components/MyLoading';
 
 // Icons
-import {AiOutlineRight, AiOutlineLeft} from 'react-icons/ai';
 import {VscSettings} from 'react-icons/vsc';
+import {AiOutlineRight, AiOutlineLeft} from 'react-icons/ai';
 
 
 const Recipes = () => {
-    const apiKey = process.env.REACT_APP_SPOONACULAR_API_KEY;
-    const [offset, setOffset] = useState(0);
-    const [url, setUrl] = useState(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&offset=${offset}`);
-
-    // ----- get recipes
-    const [recipes, setRecipes] = useState([]);
-
-    async function fetchData(url) {
-        const response = await (axios.get(url))
-            .catch(error => alert(error));
-        setRecipes(response.data.results);
-    }
-
-    useEffect(() => {    
-        fetchData(url);
-    }, [url]);
-
     // ----- open filters section
     const [open, setOpen] = useState(false);
+    
     const toggleFilters = () => {
         const button = document.getElementById('open-filters-button');
         const input = document.getElementById('filters-input');
         setOpen(!open);
-        if (open) {
-            button.style.backgroundColor = '#ffffff';
-            button.style.borderBottom = '1px solid var(--white)';
-            button.style.padding = '20px';
-            input.style.display = 'block';
-        } else {
+        if (!open) {
             input.style.display = 'none';
             button.style.backgroundColor = '';
             button.style.borderBottom = 'none';
             button.style.padding = '0';
+        } else {
+            button.style.backgroundColor = '#ffffff';
+            button.style.borderBottom = '1px solid var(--white)';
+            button.style.padding = '20px';
+            input.style.display = 'block';
         }
     }
 
-    // ----- set filters
-    // query and time filters
-    const [query, setQuery] = useState();
+    // ----- setup filters
+    // --- start values
+    const [offset, setOffset] = useState(0);
+    const [query, setQuery] = useState('');
     const [time, setTime] = useState();
-
-    // intolerances filter
     const [intolerances, setIntolerances] = useState([]);
+    const [cuisines, setCuisines] = useState([]);
+
+    const [filters, setFilters] = useState({offset});
+
+    // --- setted values
+    // 1 - query and time filters set in input onChange
+
+    // 2 - intolerances filter
     const toggleIntolerances = (e) => {
        if (!intolerances.includes(e.target.value)) {setIntolerances(prevIntolerances => [...prevIntolerances, e.target.value]);}
        else {setIntolerances(intolerances.filter(intolerance => intolerance !== e.target.value));}
     }
 
-    // cuisines filter
-    const [cuisines, setCuisines] = useState([]);
+    // 3 - cuisines filter
     const toggleCuisine = (e) => {
         if (!cuisines.includes(e.target.value)) {setCuisines(prevCuisines => [...prevCuisines, e.target.value]);}
         else {setCuisines(cuisines.filter(cuisine => cuisine !== e.target.value));}
     }
 
+    
     // ----- add filters
-    const setFilters = (e) =>{
+    const setupFilters = (e) =>{
         e.preventDefault();
 
-        // set initial config
-        setOffset(0);
-        setUrl(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&offset=${offset}`);
-
-        // set filters
-        let queryModified = '';
-        const modifyQuery = (text) => {
-            return queryModified = text.replace(' ', '-');
-        };
-        modifyQuery(query);
-
-        if (queryModified !== '') {
-            setUrl(prevUrl => prevUrl + `&query=${queryModified}`);
-        }
-
-        if (time !== undefined) {
-            setUrl(prevUrl => prevUrl + `&maxReadyTime=${time}`);
-        }
-
-        if (intolerances.length > 0) {
-            const intolerancesToString = intolerances.join();
-            setUrl(prevUrl => prevUrl + `&intolerances=${intolerancesToString}`);
-        }
-
-        if (cuisines.length > 0) {
-            const cuisinesToString = cuisines.join();
-            setUrl(prevUrl => prevUrl + `&cuisine=${cuisinesToString}`);
-        }
-
-        // setNumber(100);
-        setUrl(prevUrl => prevUrl + '&number=100');
+        setFilters({
+            offset: 0,
+            number: 100,
+            query: modifyQuery(query),
+            time,
+            intolerances: intolerances.join(),
+            cuisines: cuisines.join()
+        });
 
         // reset query input
         setQuery('');
@@ -113,52 +87,39 @@ const Recipes = () => {
     };
 
     // ----- delete filters
-    const deleteFilters = () => {
+    const removeFilters = () => {
+        // reset input
         setOffset(0);
         setQuery('');
         setTime();
         setIntolerances([]);
         setCuisines([]);
-        setUrl(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&offset=${offset}`);
+
+        setFilters({offset});
 
         const checkboxInput = document.querySelectorAll('input[type=checkbox]');
         for (let i = 0; i < checkboxInput.length; i++) {
             checkboxInput[i].checked = false;
-        }       
-    }
+        };       
+    };  
 
-    // ------ "change page"
-    const offsetString = '&offset=';
-    const offsetStringLength = offsetString.length;
-    const indexOfOffset = url.indexOf(offsetString);
-
+    // ------ "change page"   
     const nextRecipes = () => {
-        if (offset < 900) {
-            const newOffset = offset + 10;
-            setOffset(newOffset);
-
-            if (offset < 100) {
-                return setUrl(url.substring(0, indexOfOffset + offsetStringLength) + newOffset + url.substring(indexOfOffset + offsetStringLength + 2));
-            } else if (offset >= 100) {
-                return setUrl(url.substring(0, indexOfOffset + offsetStringLength) + newOffset + url.substring(indexOfOffset + offsetStringLength + 3));
-            }
-        }        
-    }
+        setOffset(offset + 10);
+        setFilters({offset: offset + 10});
+    };
 
     const prevRecipes = () => {
-        if (offset >= 10) {
-            const newOffset = offset - 10;
-            setOffset(newOffset);
+        setOffset(offset - 10);
+        setFilters({offset: offset - 10});
+    };
 
-            if (offset === 10) {
-                return setUrl(url.substring(0, indexOfOffset + offsetStringLength) + newOffset + url.substring(indexOfOffset + offsetStringLength + 1));
-            } else if (offset < 100) {
-                return setUrl(url.substring(0, indexOfOffset + offsetStringLength) + newOffset + url.substring(indexOfOffset + offsetStringLength + 2));
-            } else if (offset >= 100) {
-                return setUrl(url.substring(0, indexOfOffset + offsetStringLength) + newOffset + url.substring(indexOfOffset + offsetStringLength + 3));
-            }
-        }
-    }
+    // ----- get recipes
+    const {data, isLoading} = useAllRecipesData(filters);
+
+    if (isLoading) {
+        return <MyLoading />
+    };
 
     
     return (
@@ -166,11 +127,16 @@ const Recipes = () => {
             <div className={style['contents-container']}>
             <h1>Ricette</h1>
 
+                {/* <Filters /> */}
                 <div className={style['filters-container']}>
+
+                    {/* open/close button */}
                     <div id='open-filters-button' className={style['open-filters-button']} onClick={toggleFilters}>
                         <VscSettings /> filtra
                     </div>
-                    <form id='filters-input' className={style['filters-input']} onSubmit={setFilters}>
+
+                    {/* filters section */}
+                    <form id='filters-input' className={style['filters-input']} onSubmit={setupFilters}>
 
                         <div className={style['filters-columns']}>
                             <div className={style['single-column']}>
@@ -250,26 +216,23 @@ const Recipes = () => {
                         <button type='submit' className={style['set-filters-button']}>applica filtri</button>                  
                     </form>
                 </div>
-                {query.length > 0 || intolerances.length > 0 || cuisines.length > 0
-                    ?
-                        <button className={style['delete-filters-button']} onClick={deleteFilters}>cancella filtri</button>
-                    :
-                        ''
-                }
 
-                
-                {recipes.length > 0 
-                    ? 
-                        <div className={style['recipes-container']}>
-                            {recipes.map(recipe => <RecipePreview key={recipe.id} info={recipe} />)}
+                {/* delete filters button */}
+                {'number' in filters
+                    ? <button className={style['delete-filters-button']} onClick={removeFilters}>cancella filtri</button>
+                    : ''
+                }
+  
+                {data?.data.results.length > 0 
+                    ?   <div className={style['recipes-container']}>
+                            {data.data.results.map(recipe => <RecipePreview key={recipe.id} info={recipe} />)}
                         </div>
-                    :
-                        <p className={style['recipes-not-found']}>Siamo spiacenti, ma la ricerca da te tentata non ha prodotto risultati. Prova con una nuova ricerca.</p>
+                    :   <p className={style['recipes-not-found']}>Siamo spiacenti, ma la ricerca da te tentata non ha prodotto risultati. Prova con una nuova ricerca.</p>
                 }
                 
                 <div className={style['buttons-container']}>
-                    <button onClick={prevRecipes} className={style['recipes-button']} >{offset < 10 ? '' : <AiOutlineLeft />}</button>
-                    <button onClick={nextRecipes} className={style['recipes-button']} >{offset > 900 || recipes.length < 10 || url.includes('&number=') ? '' : <AiOutlineRight />}</button>
+                    <button onClick={prevRecipes} className={style['recipes-button']} >{offset < 10 || <AiOutlineLeft />}</button>
+                    <button onClick={nextRecipes} className={style['recipes-button']} >{(offset > 900 || data?.data.results.length < 10 || 'number' in filters) || <AiOutlineRight />}</button>
                 </div>
             </div>    
         </div>

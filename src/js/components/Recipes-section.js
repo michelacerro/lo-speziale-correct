@@ -2,35 +2,29 @@
 import style from '../../css/pages/Home.module.css';
 
 // Dependencies
-import React, {useState, useEffect} from 'react';
-import axios from 'axios';
+import React from 'react';
+
+// Hooks
+import {useRandomRecipesData} from '../hooks/UseRecipesData';
 
 // Components
 import RecipePreview from './RecipePreview';
 import Button from './Button';
+import MyLoading from './MyLoading';
 
 
 const RecipesSection = () => {
-    const apiKey = process.env.REACT_APP_SPOONACULAR_API_KEY;
-    const url = `https://api.spoonacular.com/recipes/random?apiKey=${apiKey}&number=3`;
-    const [recipes, setRecipes] = useState([]);
-
-    async function fetchData(url) {
-        const response = await (axios.get(url))
-            .catch(error => alert(error));
-        setRecipes(response.data.recipes);
-    }
-
-    useEffect(() => {
-        fetchData(url);
-    }, [url]);
+    const {isLoading, data} = useRandomRecipesData();
 
     return (
         <div className={style['recipes-section']}>
             <h1>Le nostre ricette</h1>
-            <div className={style['recipes-container']}>
-                {recipes.map(recipe => <RecipePreview key={recipe.id} info={recipe} />)}
-            </div>
+            {isLoading ? 
+                <MyLoading /> :
+                <div className={style['recipes-container']}>
+                    {data?.data.recipes.map(recipe => <RecipePreview key={recipe.id} info={recipe} />)}
+                </div>
+            }
             <Button link='/ricette' text='scopri tutte le nostre ricette' />
         </div>
     )

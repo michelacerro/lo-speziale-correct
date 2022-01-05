@@ -4,6 +4,7 @@ import '../css/App.css';
 // Dependencies
 import React from 'react';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import {QueryClientProvider, QueryClient} from 'react-query';
 
 // Pages
 import Home from './pages/Home';
@@ -23,9 +24,11 @@ import Footer from './components/Footer';
 import ScrollToTop from './ScrollToTop';
 
 
+const queryClient = new QueryClient();
+
 const App = () => {
   return (
-    <div>
+    <QueryClientProvider client={queryClient}>
       <BrowserRouter>
       <ScrollToTop />
         <Header />
@@ -41,7 +44,7 @@ const App = () => {
         </Routes>
         <Footer />
       </BrowserRouter>
-    </div>
+    </QueryClientProvider>
   )
 };
 export default App;

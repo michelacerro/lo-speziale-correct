@@ -12,9 +12,9 @@ import Comment from './Comment';
 const Comments = () => {
     const id = useParams().id;
 
-    const [name, setName] = useState();
-    const [email, setEmail] = useState();
-    const [comment, setComment] = useState();
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [comment, setComment] = useState('');
 
     const comments = JSON.parse(window.localStorage.getItem('comments')) || [];
 
@@ -22,9 +22,9 @@ const Comments = () => {
         e.preventDefault();
 
         comments.push({
-            'name': name,
-            'email': email,
-            'comment': comment,
+            name,
+            email,
+            comment,
             'recipe_id': id
         });
 
@@ -78,6 +78,7 @@ const Comments = () => {
                 </label>
                 <button type='submit' >Aggiungi commento</button>
             </form>
+            
             <div className={style['comments-container']}>
                 {comments.length > 0 
                     ? 
