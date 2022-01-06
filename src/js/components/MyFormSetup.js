@@ -2,6 +2,12 @@
 import * as Yup from 'yup';
 import axios from 'axios';
 
+// Store
+import store from '../store';
+
+// Actions
+import {sentMessage} from '../actions';
+
 
 export const initialValues = {
     name: '',
@@ -10,15 +16,19 @@ export const initialValues = {
     privacy: []
 };
 
+
 export const onSubmit = (values, onSubmitProps) => {
     axios({
         method: 'post',
         url: 'https://formsubmit.co/michelacerro@gmail.com',
         data: values
-    }).catch(error => console.error(error))
-    alert('Grazie, il messaggio è stato inviato. Risponderemo il prima possibile.')
-    onSubmitProps.setSubmitting(false);
-    onSubmitProps.resetForm();
+    })
+    .then(resp => {
+        if (resp.status === 200) {
+        store.dispatch(sentMessage());
+        onSubmitProps.setSubmitting(false);
+        onSubmitProps.resetForm();
+    }}).catch(error => console.error(error))
 };
 
 export const validationSchema = Yup.object({
