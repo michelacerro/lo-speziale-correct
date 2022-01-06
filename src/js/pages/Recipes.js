@@ -51,7 +51,7 @@ const Recipes = () => {
     const [filters, setFilters] = useState({offset});
 
     // --- setted values
-    // 1 - query and time filters set in input onChange
+    // 1 - query and time filters setted in input onChange
 
     // 2 - intolerances filter
     const toggleIntolerances = (e) => {

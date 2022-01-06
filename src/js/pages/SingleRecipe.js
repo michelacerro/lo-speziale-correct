@@ -21,7 +21,14 @@ import {BsPeople} from 'react-icons/bs';
 
 const SingleRecipe = () => {
     const id = useParams().id;
-    const {details, loadingDetails, ingredients, loadingIngredients, steps, loadingSteps} = useSingleRecipeData(id);
+    const {
+        details, 
+        loadingDetails, 
+        ingredients, 
+        loadingIngredients, 
+        steps, 
+        loadingSteps
+    } = useSingleRecipeData(id);
 
     if (loadingDetails || loadingIngredients || loadingSteps) {
         return <MyLoading />

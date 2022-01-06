@@ -16,7 +16,6 @@ export const initialValues = {
     privacy: []
 };
 
-
 export const onSubmit = (values, onSubmitProps) => {
     axios({
         method: 'post',
