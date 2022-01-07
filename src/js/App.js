@@ -21,7 +21,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 
 // Functionalities
-import ScrollToTop from './ScrollToTop';
+import UseScrollToTop from './hooks/UseScrollToTop';
 
 
 const queryClient = new QueryClient();
@@ -30,7 +30,7 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
-      <ScrollToTop />
+      <UseScrollToTop />
         <Header />
         <Routes>
           <Route path='/lo-speziale-correct' element={<Home />} />
