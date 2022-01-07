@@ -5,7 +5,7 @@ import style from '../../css/pages/Recipes.module.css';
 import React, {useState} from 'react';
 
 // Utils
-import {modifyQuery} from '../utils/Utils';
+import {modifyQuery, toggleFilters} from '../utils/Utils';
 
 // Hooks
 import {useAllRecipesData} from '../hooks/UseRecipesData';
@@ -20,30 +20,10 @@ import {AiOutlineRight, AiOutlineLeft} from 'react-icons/ai';
 
 
 const Recipes = () => {
-    // ----- open filters section
-    const [open, setOpen] = useState(false);
-    
-    const toggleFilters = () => {
-        const button = document.getElementById('open-filters-button');
-        const input = document.getElementById('filters-input');
-        setOpen(!open);
-        if (!open) {
-            input.style.display = 'none';
-            button.style.backgroundColor = '';
-            button.style.borderBottom = 'none';
-            button.style.padding = '0';
-        } else {
-            button.style.backgroundColor = '#ffffff';
-            button.style.borderBottom = '1px solid var(--white)';
-            button.style.padding = '20px';
-            input.style.display = 'block';
-        }
-    }
-
     // ----- setup filters
     // --- start values
     const [offset, setOffset] = useState(0);
-    const [query, setQuery] = useState('');
+    const [query, setQuery] = useState();
     const [time, setTime] = useState();
     const [intolerances, setIntolerances] = useState([]);
     const [cuisines, setCuisines] = useState([]);
@@ -57,13 +37,13 @@ const Recipes = () => {
     const toggleIntolerances = (e) => {
        if (!intolerances.includes(e.target.value)) {setIntolerances(prevIntolerances => [...prevIntolerances, e.target.value]);}
        else {setIntolerances(intolerances.filter(intolerance => intolerance !== e.target.value));}
-    }
+    };
 
     // 3 - cuisines filter
     const toggleCuisine = (e) => {
         if (!cuisines.includes(e.target.value)) {setCuisines(prevCuisines => [...prevCuisines, e.target.value]);}
         else {setCuisines(cuisines.filter(cuisine => cuisine !== e.target.value));}
-    }
+    };
 
     
     // ----- add filters
@@ -145,7 +125,7 @@ const Recipes = () => {
                                     <div className={style['filter-section']}>
                                         <h4>ricerca per nome</h4>
                                         <label htmlFor='query'><small>(in inglese)</small></label>
-                                        <input type='text' name='query' value={query} onChange={e => setQuery(e.target.value)}/>
+                                        <input type='text' name='query' value={query || ''} onChange={e => setQuery(e.target.value)}/>
                                     </div>
 
                                     {/* time */}
