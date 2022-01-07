@@ -5,30 +5,11 @@ import styles from '../../css/components/Header.module.css';
 import React from 'react';
 import {NavLink} from 'react-router-dom';
 
+// Utils
+import {toggleMenu} from '../utils/Utils';
+
 
 const Navbar = () => {
-   // animation navbar icon and toggle menu
-    const toggleMenu = () => {
-        if (window.innerWidth < 800) {
-        const bar1 = document.getElementById('icon-bar1');
-        const bar2 = document.getElementById('icon-bar2');
-        const bar3 = document.getElementById('icon-bar3');
-        const navbarList = document.getElementById('navbar-list');
-            if (navbarList.style.display === 'none') {
-                bar1.style.transform = 'rotate(45deg) translate(4px, 4px)';
-                bar2.style.opacity = '0';
-                bar3.style.transform = 'rotate(-45deg) translate(4px, -4px)';
-                navbarList.style.display = 'flex';
-            } else {
-                bar1.style.transform = '';
-                bar2.style.opacity = '';
-                bar3.style.transform = '';
-                navbarList.style.display = 'none';
-            };
-        };
-    };
-
-
     return (
         <div className={styles['navbar']}>
             <div className={styles['navbar-icon']} onClick={toggleMenu}>

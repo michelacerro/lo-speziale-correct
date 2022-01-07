@@ -10,3 +10,17 @@ export const newMessage = () => {
         type: 'NEW'
     };
 };
+
+
+// filtersReducer
+export const openFilters = () => {
+    return {
+        type: 'OPEN'
+    };
+};
+
+export const closeFilters = () => {
+    return {
+        type: 'CLOSE'
+    };
+};
