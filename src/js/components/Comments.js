@@ -12,9 +12,9 @@ import Comment from './Comment';
 const Comments = () => {
     const id = useParams().id;
 
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [comment, setComment] = useState('');
+    const [name, setName] = useState();
+    const [email, setEmail] = useState();
+    const [comment, setComment] = useState();
 
     const comments = JSON.parse(window.localStorage.getItem('comments')) || [];
 
@@ -30,9 +30,9 @@ const Comments = () => {
 
         window.localStorage.setItem('comments', JSON.stringify(comments));
 
-        setName('');
-        setEmail('');
-        setComment('');
+        setName();
+        setEmail();
+        setComment();
     };
 
     return (
@@ -47,7 +47,7 @@ const Comments = () => {
                             id='name' 
                             name='name' 
                             placeholder='Nome' 
-                            value={name} 
+                            value={name || ''} 
                             onChange={(e) => setName(e.target.value)} 
                             required 
                         />
@@ -59,7 +59,7 @@ const Comments = () => {
                             id='email' 
                             name='email' 
                             placeholder='Email' 
-                            value={email} 
+                            value={email || ''} 
                             onChange={(e) => setEmail(e.target.value)} 
                         />
                     </label>
@@ -71,7 +71,7 @@ const Comments = () => {
                         id='comment' 
                         name='comment' 
                         placeholder='Scrivi qui il tuo commento...' 
-                        value={comment} 
+                        value={comment || ''} 
                         onChange={(e) => setComment(e.target.value)} 
                         required 
                     />
@@ -81,10 +81,8 @@ const Comments = () => {
             
             <div className={style['comments-container']}>
                 {comments.length > 0 
-                    ? 
-                        comments.filter(comment => (comment.recipe_id === id)).map((comment, index) => <Comment key={index} info={comment} />)
-                    :
-                        ''
+                    ? comments.filter(comment => (comment.recipe_id === id)).map((comment, index) => <Comment key={index} info={comment} />)
+                    : ''
                 }
             </div>
         </div>
