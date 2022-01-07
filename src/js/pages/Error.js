@@ -15,7 +15,7 @@ const Error = () => {
                 <h1>404<br/>Pagina non trovata</h1>
                 <p>Siamo spiacenti, ma la pagina da te cercata non esiste.
                     <br/>Prova una delle opzioni qui di seguito.</p>
-                <Button link='/lo-speziale' text='Torna alla home' />
+                <Button link='/lo-speziale-correct' text='Torna alla home' />
                 <Button link='/corsi' text='scopri i nostri corsi' />
                 <Button link='/contatti' text='contattaci' />
             </div>

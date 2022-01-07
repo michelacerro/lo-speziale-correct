@@ -33,7 +33,7 @@ const App = () => {
       <ScrollToTop />
         <Header />
         <Routes>
-          <Route path='/lo-speziale' element={<Home />} />
+          <Route path='/lo-speziale-correct' element={<Home />} />
           <Route path='/chi-siamo' element={<About />} />
           <Route path='/corsi' element={<Courses />} />
           <Route path='/ricette' element={<Recipes />} />

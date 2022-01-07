@@ -13,7 +13,7 @@ import Navbar from './Navbar';
 const Header = () => {
     return (
         <header className={style['header']}>
-            <Link to='/lo-speziale' className={style['header-logo']}><Logo /></Link>
+            <Link to='/lo-speziale-correct' className={style['header-logo']}><Logo /></Link>
             <Navbar />
         </header>
     )
