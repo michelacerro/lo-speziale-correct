@@ -1,6 +1,7 @@
 # Front End Project: Lo Speziale
-Corrected Version <br/>
 Project for start2impact <br/>
+Corrected Version <br/>
+
 
 ## Description
 ### General description
@@ -12,6 +13,7 @@ Clicking the preview of the recipe will open a specific page in which you can fi
 
 ### Tecnical description 
 The app was developed with: React, Redux, React Query, Axios, Formik and Dotenv.
+
 
 ## Test me!
 https://michelacerro.github.io/lo-speziale-correct/
